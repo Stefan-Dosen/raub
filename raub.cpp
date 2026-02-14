@@ -11,6 +11,7 @@ int TRICK_SIZE {4};
 int POINTS_PER_GAME {21};
 
 
+
 class Card
 {
 private:
@@ -18,45 +19,78 @@ private:
 	char suit{};
 	int rank{};	
 public:
-
-	Card(char cars_suit, int card_rank)
-	{
-		suit = card_suit;
-		rank = card_rank;
-	}
-
-	void display_card()
-	{
-		std::cout << rank << suit << '\n';
-	}
+	Card(char cars_suit, int card_rank);
+	void display_card();
+	char get_suit();
+	int get_rank();
 };
 
+
+
+Card::Card(char cars_suit, int card_rank)
+{
+	suit = card_suit;
+	rank = card_rank;
+}
+void Card::display_card()
+{
+	std::cout << rank << suit << '\n';
+}
+char Card::get_suit()
+{
+	return suit;
+}
+int Card::get_rank()
+{
+	return rank;
+}
 
 class Deck
 {
 private:
 	std::vector<Card> deck{};
 public:
-	void init()
-	{
-		for(int i=7; i<=14;++i)
-		{
-			for(size_t j=0; j<4; ++j)
-			{
-			Card card{Suits[j],i};
-			deck.push_back(card);
-			}
-		}	
-	}
-	
-	void display_deck()
-	{
-		for(size_t i=0;i<=31;++i)
-		{
-			deck[i].display_card();
-		}
-	}
+	void init();
+	void display_deck();
+	Card* remove_card_from_deck(Card* card);
 };
+
+
+
+void Deck::init()
+{
+	for(int i=7; i<=14;++i)
+	{
+		for(size_t j=0; j<4; ++j)
+		{
+		Card card{Suits[j],i};
+		deck.push_back(card);
+		}
+	}	
+}
+void Deck::display_deck()
+{
+	for(size_t i=0;i<=31;++i)
+	{
+		deck[i].display_card();
+	}
+}
+Card* Deck::remove_card_from_deck(Card* card_to_remove)
+{
+	counter{};
+	for(Card card : deck)
+	{
+		if(card.get_rank == card_to_remove.get_rank && card.get_suit == card_to_remove.get_suit)
+		{
+			break;
+		}
+		++couter;
+	}
+	if(couner > deck.size()) return;
+
+	deck[counter].erase();
+}
+
 
 class Player
 {
@@ -66,18 +100,22 @@ private:
 	std::vector<Card> hand{};
 
 public:
-	Player(std::string player_name, int player_points)
-	{
-		name = player_name;
-		points = player_points;
-	}
-	
-	int points_left()
-	{
-		return points;
-	}
+	Player(std::string player_name, int player_points);
+	int points_left();
+
 };
 
+
+
+Player::Player(std::string player_name, int player_points)
+{
+	name = player_name;
+	points = player_points;
+}
+int Player::points_left()
+{
+	return points;
+}
 
 int main()
 {
