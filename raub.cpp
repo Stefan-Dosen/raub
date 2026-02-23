@@ -1,5 +1,3 @@
-// implement hands 
-
 #include <iostream>
 #include <vector>
 
@@ -70,7 +68,7 @@ void Deck::init()
 }
 void Deck::display_deck()
 {
-	for(size_t i=0;i<=31;++i)
+	for(size_t i=0;i<deck.size();++i)
 	{
 		deck[i].display_card();
 	}
@@ -102,6 +100,7 @@ private:
 public:
 	Player(std::string player_name, int player_points);
 	int points_left();
+	void add_to_hand(Card* card);
 
 };
 
@@ -116,6 +115,12 @@ int Player::points_left()
 {
 	return points;
 }
+void Player::add_to_hand(Card* card, Deck* deck)
+{
+	hand.push_back(card);
+	deck.remove_card_from_deck(card);
+}
+
 
 int main()
 {
@@ -133,16 +138,9 @@ int main()
 	Player p2{p2_name, POINTS_PER_GAME};
 	
 	// game loop
-	while(p1.points_left() >= 0 || p2.points_left() >=0)
+	while(p1.points_left() > 0 || p2.points_left() >0)
 	{
-		// round 
-		for(int i=DECK_SIZE; i>=0; i-=TRICK_SIZE)
-		{
-			deck.remove_trick();
-			deck.remove_trick();
-
-
-		}
+		if(deck.
 
 	
 	}
