@@ -1,44 +1,49 @@
 #ifndef CARD_H
 #define CARD_H
-enum Rank{seven=7, eight=8, nine=9, ten=10, J=11, Q=12, K=13, A=14};
-std::vector<char> Suits {'A','H','S','C'};
 
-int DECK_SIZE {32};
-int TRICK_SIZE {4};
-int POINTS_PER_GAME {21};
-
-
-
-class Card
+enum class Suit
 {
-private:
+	HEARTS, DIAMONDS, CLUBS, SPADES, COUNT
+};
 
-	char suit{};
-	int rank{};	
-public:
-	Card(char cars_suit, int card_rank);
-	void display_card();
-	char get_suit();
-	int get_rank();
+enum class Rank
+{
+	SEVEN=7, EIGHT=8, NINE=9, TEN=10, JACK=11, QUEEN=12, KING=13, ACE=14, COUNT=15
 };
 
 
+inline std::string rankToString(Rank rank)
+{
+    switch(rank)
+    {
+        case Rank::SEVEN:  return "7";
+        case Rank::EIGHT:  return "8";
+        case Rank::NINE:   return "9";
+        case Rank::TEN:    return "10";
+        case Rank::JACK:   return "J";
+        case Rank::QUEEN:  return "Q";
+        case Rank::KING:   return "K";
+        case Rank::ACE:    return "A";
+        default:           return "?";
+    }
+}
 
-Card::Card(char cars_suit, int card_rank)
+inline std::string suitToString(Suit suit)
 {
-	suit = card_suit;
-	rank = card_rank;
+    switch(suit)
+    {
+        case Suit::HEARTS:   return "Hearts";
+        case Suit::DIAMONDS: return "Diamonds";
+        case Suit::CLUBS:    return "Clubs";
+        case Suit::SPADES:   return "Spades";
+        default:             return "?";
+    }
 }
-void Card::display_card()
+
+struct Card
 {
-	std::cout << rank << suit << '\n';
-}
-char Card::get_suit()
-{
-	return suit;
-}
-int Card::get_rank()
-{
-	return rank;
-}
+	Rank rank{};
+	Suit suit{};
+};
+
 #endif
