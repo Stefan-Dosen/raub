@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "Deck.h"
+#include <cstdlib>
+#include <ctime>
+#include "../include/Deck.h"
 
 
 void Deck::init()
@@ -23,7 +25,8 @@ void Deck::display_deck()
 }
 Card Deck::deal_card()
 {
-	size_t randCardIndex = 8;
+	srand(time(0));
+	size_t randCardIndex = rand() % deck.size();
 	Card card  = deck[randCardIndex];
 	deck.erase(deck.begin() + randCardIndex);
 	return card;

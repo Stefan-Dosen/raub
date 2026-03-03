@@ -1,6 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 
+#include <map>
+
 enum class Suit
 {
 	HEARTS, DIAMONDS, CLUBS, SPADES, COUNT
@@ -38,6 +40,38 @@ inline std::string suitToString(Suit suit)
         case Suit::SPADES:   return "Spades";
         default:             return "?";
     }
+}
+
+inline Rank string_to_rank(std::string rank)
+{
+	static const std::unordered_map<std::string, Rank> ranks{
+					{"7", Rank::SEVEN},
+					{"8", Rank::EIGHT},
+					{"9", Rank::NINE},
+					{"10", Rank::TEN},
+					{"J", Rank::JACK},
+					{"Q", Rank::QUEEN},
+					{"K", Rank::KING},
+					{"A", Rank::ACE},	
+					};
+	if(!ranks.contains(rank)) return Rank::COUNT;
+	return ranks[rank];
+}
+
+inline Suit string_to_suit(std::string suit)
+{
+	static const std::unordered_map<std::string, Suit> suits{
+					{"H", 		Suit::HEARTS},
+					{"D", 		Suit::DIAMONDS},
+					{"C",		Suit::CLUBS},
+					{"S", 		Suit::SPADES},
+					{"Hearts", 	Suit::HEARTS},
+					{"Diamonds", 	Suit::DIAMONDS},
+					{"Clubs", 	Suit::CLUBS},
+					{"Spades", 	Suit::SPADES},	
+					};
+	if(!suits.contains(suit)) return Suit::COUNT;
+	return suits[suit];
 }
 
 struct Card
