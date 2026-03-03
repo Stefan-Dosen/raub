@@ -1,9 +1,9 @@
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
+CXXFLAGS = -Wall -Wextra -std=c++20
 
 TARGET = raub
 
-SRCS = src/raub.cpp src/Deck.cpp
+SRCS = src/raub.cpp src/Deck.cpp src/Player.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 all: $(TARGET)

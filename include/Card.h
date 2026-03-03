@@ -1,7 +1,8 @@
 #ifndef CARD_H
 #define CARD_H
 
-#include <map>
+#include <unordered_map>
+#include <string>
 
 enum class Suit
 {
@@ -55,7 +56,7 @@ inline Rank string_to_rank(std::string rank)
 					{"A", Rank::ACE},	
 					};
 	if(!ranks.contains(rank)) return Rank::COUNT;
-	return ranks[rank];
+	return ranks.at(rank);
 }
 
 inline Suit string_to_suit(std::string suit)
@@ -71,7 +72,7 @@ inline Suit string_to_suit(std::string suit)
 					{"Spades", 	Suit::SPADES},	
 					};
 	if(!suits.contains(suit)) return Suit::COUNT;
-	return suits[suit];
+	return suits.at(suit);
 }
 
 struct Card

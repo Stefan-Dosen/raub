@@ -13,10 +13,7 @@ int main()
 	Deck deck;
 	deck.init();
 	
-	for(int i=0; i<8; ++i)
-	{
-		Card card { deck.deal_card() };
-		std::cout << rankToString(card.rank) << suitToString(card.suit) << '\n';
-	}
+
+
 	return 0;
 }
