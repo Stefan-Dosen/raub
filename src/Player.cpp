@@ -1,5 +1,5 @@
 #include "../include/Player.h"
-
+#include <iostream>
 Card Player::play_card(std::string rank, std::string suit)
 {
 	Rank cardRank = string_to_rank(rank);
@@ -30,3 +30,17 @@ void Player::take_card(Card card)
 {
 	hand.push_back(card);
 }
+void Player::display()
+{
+	std::cout << name << ": " << score << '\n';
+	for(Card card: hand)
+	{
+		std::cout << rankToString(card.rank) << suitToString(card.suit) << '\n';
+	}
+}
+Player::Player(std::string player_name, int player_score)
+{
+	name = player_name;
+	score = player_score;
+}
+

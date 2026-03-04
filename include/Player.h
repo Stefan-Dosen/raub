@@ -8,8 +8,12 @@ class Player
 {
 private:
 	std::vector<Card> hand{};
+	std::string name{};
+	int score{};
 public:
 	Card play_card(std::string rank, std::string suit);
 	void take_card(Card card);
+	void display();
+	Player(std::string player_name, int player_score);
 };
 #endif
