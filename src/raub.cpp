@@ -4,35 +4,51 @@
 #include "../include/Card.h"
 #include "../include/Player.h"
 
-int DECK_SIZE {32};
 int POINTS_PER_GAME {21};
 
 int main()
-{
-	
-	
+{	
+	std::cout << "Enter p1 name: ";
 	std::string name{};
-	std::cout << "Enter player1 name: ";
 	std::cin >> name;
 	Player p1{name, POINTS_PER_GAME};
 	
-	std::cout << "-------------------------\n";	
-	p1.display();
-	std::cout << "-------------------------\n";	
-	
-	Deck deck;
-	deck.init();	
-	
-	Card c1 = deck.deal_card();
-	std::cout << rankToString(c1.rank) << suitToString(c1.suit) << '\n';
-	std::cout << "-------------------------\n";	
-	
-	p1.take_card(c1);
-	p1.display();
-	std::cout << "-------------------------\n";	
+	std::cout << "Enter p2 name: ";
+	std::cin >> name;
+	Player p2{name, POINTS_PER_GAME};
 
-	p1.play_card(rankToString(c1.rank), suitToString(c1.suit));
+	Deck deck;
+	deck.init();
+
+	Card middle{deck.deal_card()};
+
+	for(int i=0; i<4; ++i)
+	{
+		p1.take_card(deck.deal_card());
+		p2.take_card(deck.deal_card());
+	}
+
+	std::cout << "--------------------------\n";
+	std::cout << "Card in the middle: " << rank_to_string(middle.rank)  << suit_to_string(middle.suit) << '\n';
+
+	// TODO: implement chosing middle card loop
+	
+	std::cout << "--------------------------\n";
 	p1.display();
+	
+	std::string rank_to_play{};
+	std::string suit_to_play{};
+
+	std::cin >> rank_to_play >> suit_to_play;	
+	Card played_card_p1{p1.play_card(rank_to_play, suit_to_play)};
+	
+	std::cout << "--------------------------\n";
+	p2.display();
+	
+	std::cin >> rank_to_play >> suit_to_play;	
+	Card played_card_p2{p1.play_card(rank_to_play, suit_to_play)};
+
+	// TODO: implement score reduction logic, also add score reduction API to Player
 
 	return 0;
 }
